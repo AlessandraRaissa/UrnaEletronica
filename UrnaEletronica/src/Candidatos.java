@@ -285,5 +285,5 @@ public class Candidatos extends javax.swing.JFrame {
         }
         System.out.println("O CANDIDATO ELEITO FOI: " + infieisNomes[candidatoGanhador] + "COM " + infieis[candidatoGanhador]);
     }
-
+    //wip
 }
