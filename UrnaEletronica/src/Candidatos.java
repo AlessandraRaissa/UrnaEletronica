@@ -19,8 +19,10 @@ public class Candidatos extends javax.swing.JFrame {
     int i = 0, validar = 0;
     Timer timer;
     Thread thread;
-    int [] infieis = new int[5]; //vetor do partido infieis onde cada casa do vetor representa um candidato. Permite 5 candidatos.
-    //cada casa do vetor representa um candidato específico do partido
+    String[] infieisNomes = new String[5]; //vetor do partido infieis que recebe os nomes
+    int [] infieis = new int[5]; //vetor do partido infieis que recebe os votos
+    int ganhador = 0;
+    int candidatoGanhador = 0;
 
 
     public void labelsiniciar() { //labels escondidas inicialmente
@@ -108,7 +110,8 @@ public class Candidatos extends javax.swing.JFrame {
                             //confiravoto_votodelegenda();
                             validar = 2; //se o partido for válido e o candidato for válido
                             System.out.println("partido valido e candidato valido: " + validar);
-                            infieis[0]++; //o valor na casa 0 do vetor vai receber 1 voto a cada "round", ou seja, a casa 0 do vetor "infieis" representa este candidato.
+                            infieisNomes[0] = "Abner";
+                            infieis[0]++; //a casa 0 vai incrementar 1 voto a cada "round"
 
                         }
                         case "02" -> {
@@ -119,7 +122,8 @@ public class Candidatos extends javax.swing.JFrame {
                             //confiravoto_votodelegenda();
                             validar = 2; //se o partido for válido e o candidato for válido
                             System.out.println("partido valido e candidato valido: " + validar);
-                            infieis[1]++;//o valor na casa 1 do vetor vai receber 1 voto a cada "round", ou seja, a casa 1 do vetor "infieis" representa este candidato.
+                            infieisNomes[1] = "Arthur";
+                            infieis[1]++;//a casa 1 vai incrementar 1 voto a cada "round"
                         }
                         case "" -> {
                             System.out.println("nada acontece"); //se digitou só o partido válido e o candidato está vazio
@@ -237,13 +241,49 @@ public class Candidatos extends javax.swing.JFrame {
 
     }
 
-    public void mostraVotos(){
+    /*public void mostraVotos(){
         Arrays.sort(infieis); //vai arrumar o vetor infieis em ordem crescente primeiro
         System.out.println("VOTAÇÃO PARTIDO INFIEIS: ");
         for(int i = infieis.length - 1; i >=0; i--){ //isso aqui vai printar em ordem decrescente os candidatos (o com a maior quantia de votos até o com menor)
             System.out.println(infieis[i]);
         }
 
+    }*/
+
+    public void mostraVotosInfieis(){
+        for(int i = 0; i < infieis.length; i++) {
+            for(int j = i + 1; j < infieis.length; j++) {
+                if (infieis[i] < infieis[j]) {
+                    //troca a quantia de votos
+                    int infieisTemp = infieis[i];
+                    infieis[i] = infieis[j];
+                    infieis[j] = infieisTemp;
+                    //troca os nomes dos candidatos correspondentes
+                    String infieisNomesTemp = infieisNomes[i];
+                    infieisNomes[i] = infieisNomes[j];
+                    infieisNomes[j] = infieisNomesTemp;
+                }
+            }
+        }
+
+        //mostra a lista de candidatos em ordem decrescente de votos
+        System.out.println("VOTAÇÃO PARTIDO INFIEIS: ");
+        for (int i = 0; i < infieisNomes.length; i++) {
+            if(infieis[i] > 0){
+                System.out.println("O CANDIDATO " + infieisNomes[i] + "RECEBEU " + infieis[i] + "VOTOS");
+            } else {
+                System.out.println("O CANDIDATO " + infieisNomes[i] + "RECEBEU " + infieis[i] + "VOTO");
+            }
+        }
+
+        //informa o candidato vencedor
+        for (int i = 0; i < infieis.length; i++){
+            if (infieis[i] > ganhador) {
+                ganhador = infieis[i];
+                candidatoGanhador = i;
+            }
+        }
+        System.out.println("O CANDIDATO ELEITO FOI: " + infieisNomes[candidatoGanhador] + "COM " + infieis[candidatoGanhador]);
     }
 
 }
