@@ -269,10 +269,10 @@ public class Candidatos extends javax.swing.JFrame {
         //mostra a lista de candidatos em ordem decrescente de votos
         System.out.println("VOTAÇÃO PARTIDO INFIEIS: ");
         for (int i = 0; i < infieisNomes.length; i++) {
-            if(infieis[i] > 0){
-                System.out.println("O CANDIDATO " + infieisNomes[i] + "RECEBEU " + infieis[i] + "VOTOS");
-            } else {
+            if(infieis[i] == 1){
                 System.out.println("O CANDIDATO " + infieisNomes[i] + "RECEBEU " + infieis[i] + "VOTO");
+            } else {
+                System.out.println("O CANDIDATO " + infieisNomes[i] + "RECEBEU " + infieis[i] + "VOTOS");
             }
         }
 
