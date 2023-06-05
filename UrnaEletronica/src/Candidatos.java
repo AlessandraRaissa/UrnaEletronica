@@ -2,6 +2,7 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.Timer;
+import java.util.Arrays; //biblioteca para manipulação de arrays
 
 /**
  *
@@ -18,6 +19,9 @@ public class Candidatos extends javax.swing.JFrame {
     int i = 0, validar = 0;
     Timer timer;
     Thread thread;
+    int [] infieis = new int[5]; //vetor do partido infieis onde cada casa do vetor representa um candidato. Permite 5 candidatos.
+    //cada casa do vetor representa um candidato específico do partido
+
 
     public void labelsiniciar() { //labels escondidas inicialmente
 
@@ -104,6 +108,8 @@ public class Candidatos extends javax.swing.JFrame {
                             //confiravoto_votodelegenda();
                             validar = 2; //se o partido for válido e o candidato for válido
                             System.out.println("partido valido e candidato valido: " + validar);
+                            infieis[0]++; //o valor na casa 0 do vetor vai receber 1 voto a cada "round", ou seja, a casa 0 do vetor "infieis" representa este candidato.
+
                         }
                         case "02" -> {
                             UrnaDesign.cargo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagens\\arthur.jpg")));
@@ -113,6 +119,7 @@ public class Candidatos extends javax.swing.JFrame {
                             //confiravoto_votodelegenda();
                             validar = 2; //se o partido for válido e o candidato for válido
                             System.out.println("partido valido e candidato valido: " + validar);
+                            infieis[1]++;//o valor na casa 1 do vetor vai receber 1 voto a cada "round", ou seja, a casa 1 do vetor "infieis" representa este candidato.
                         }
                         case "" -> {
                             System.out.println("nada acontece"); //se digitou só o partido válido e o candidato está vazio
@@ -229,4 +236,14 @@ public class Candidatos extends javax.swing.JFrame {
         }
 
     }
+
+    public void mostraVotos(){
+        Arrays.sort(infieis); //vai arrumar o vetor infieis em ordem crescente primeiro
+        System.out.println("VOTAÇÃO PARTIDO INFIEIS: ");
+        for(int i = infieis.length - 1; i >=0; i--){ //isso aqui vai printar em ordem decrescente os candidatos (o com a maior quantia de votos até o com menor)
+            System.out.println(infieis[i]);
+        }
+
+    }
+
 }
